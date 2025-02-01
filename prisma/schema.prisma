@@ -21,7 +21,7 @@ model User {
   role        Role     @default(Player)
   manager     Manager?
   managerId   String?  @unique
-  player      Player?  @relation(fields: [playerId], references: [id]) 
+  player      Player?  @relation(fields: [playerId], references: [id])
   playerId    String?  @unique
 }
 
