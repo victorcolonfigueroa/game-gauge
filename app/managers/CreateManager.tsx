@@ -1,5 +1,9 @@
 import { Button } from '@/components/ui/button';
 import ParentComponent from '../players/CreatePlayer';
+import { useState } from 'react';
+import ManagerModal from '@/components/ManagerModal';
+import { Manager } from '@prisma/client';
+import { createManagerAction } from '../action/manager/createManagerAction';
 "use client"
 
 //import
@@ -8,7 +12,7 @@ import ParentComponent from '../players/CreatePlayer';
 
 
 const ParentComponent = () => {
-    const [isLoading, setIsLOading] = useState(flase);
+    const [isLoading, setIsLOading] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const handleSaveManager = (managerData: Manager) => {
@@ -17,15 +21,16 @@ const ParentComponent = () => {
         //Save manager to DB
         try {
             setIsLOading(true);
-          const response = createManagerAction(managerData);
+          const managerDataWithUser = { ...managerData, user: managerData.userId };
+          const response = createManagerAction(managerDataWithUser);
             console.log('Manager saved:', response);
             
         } catch (error) {
             console.error('Error saving manager:', error);
         }
-        finally (
+        finally {
             setIsLoading(false);
-        )
+        }
 
     };
 

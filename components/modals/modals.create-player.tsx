@@ -25,7 +25,7 @@ const PlayerModal = ({ isOpen, onClose, onSave } : PlayerModalProps) => {
   return (
     <div className="modal is-active">
       <div className="modal-background" onClick={onClose}></div>
-      <div className="modal-card">
+      <div className="modal-card">  
         <header className="modal-card-head">
           <p className="modal-card-title">Create Player</p>
           <button className="delete" aria-label="close" onClick={onClose}></button>
@@ -37,7 +37,7 @@ const PlayerModal = ({ isOpen, onClose, onSave } : PlayerModalProps) => {
                       </div>
           <div className="field">
             <label className="label">Name</label>
-            <div className="control">
+            <div className="control"> //me quede por aqui
               <input 
                 className="input" 
                 type="text" 
