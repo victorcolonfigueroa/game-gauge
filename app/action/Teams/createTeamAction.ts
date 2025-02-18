@@ -9,6 +9,12 @@ export async function createTeamAction (team: Team) {
     const teamResponse = await prisma.team.create({
         data: {
             ...team,
+            players: {
+                create: team.players
+            },
+            manager: {
+                connect: { id: team.managerId }
+            }
         },
     })
 
