@@ -1,57 +1,45 @@
-import { Button } from '@/components/ui/button';
-import ParentComponent from '../players/CreatePlayer';
-import { useState } from 'react';
-import ManagerModal from '@/components/ManagerModal';
-import { Manager } from '@prisma/client';
-import { createManagerAction } from '../action/manager/createManagerAction';
 "use client"
 
-//import
-
-
-
+import { Button } from '@/components/ui/button';
+import * as PlayerComponent from '../players/CreatePlayer';
+import { useState } from 'react';
+import ManagerModal from '@/components/modals/modals.create-manager';
+import { Manager } from '@prisma/client';
+import { createManagerAction } from '../action/manager/createManagerAction';
+import { Loader } from '@/components/loader';
+import { redirect } from 'next/navigation';
 
 const ParentComponent = () => {
-    const [isLoading, setIsLOading] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const handleSaveManager = (managerData: Manager) => {
-        console.log('Saving Manager:', managerData);
-
-        //Save manager to DB
+    const handleSaveManager = async (formData: FormData) => {
+        setIsLoading(true);
         try {
-            setIsLOading(true);
-          const managerDataWithUser = { ...managerData, user: managerData.userId };
-          const response = createManagerAction(managerDataWithUser);
+            const response = await createManagerAction(formData);
             console.log('Manager saved:', response);
-            
+
+            if (!response) throw new Error('Something went wrong');
+            redirect("/managers");
         } catch (error) {
             console.error('Error saving manager:', error);
-        }
-        finally {
+        } finally {
             setIsLoading(false);
+            setIsModalOpen(false);
         }
-
     };
 
-    return (
-        <div>
-            {
-                isLoading && <p>Creating Manager...</p>
-            }
+    if (isLoading) return (<Loader title="Creating Manager..." />)
 
-            {
-                !isLoading &&
-                <>
-                    <Button onClick={() => setIsModalOpen(true)}>Become a Manager</Button>
-                        <ManagerModal
-                        isOpen={isModalOpen}
-                        onClose={() => setIsModalOpen(false)}
-                        onSave={handleSaveManager}
-                        />
-                </>
-            }
-        </div>
+    return (
+        <>
+            <Button onClick={() => setIsModalOpen(true)}>Add Manager</Button>
+            <ManagerModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                onSave={handleSaveManager}
+            />
+        </>
     );
 };
 
