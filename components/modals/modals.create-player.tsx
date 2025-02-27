@@ -1,5 +1,6 @@
 import { PlusIcon } from 'lucide-react';
 import React, { useState } from 'react';
+import { Player } from '@prisma/client';
 
 
 interface PlayerModalProps {

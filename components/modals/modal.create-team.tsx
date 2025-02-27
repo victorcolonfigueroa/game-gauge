@@ -1,3 +1,4 @@
+import { Team } from "@prisma/client";
 import { PlusIcon } from "lucide-react";
 import { useState } from "react";
 
@@ -14,7 +15,7 @@ const TeamModal = ({isOpen, onClose, onSave } : TeamModalProps) => {
     const [teamName, setTeamName] = useState('');
 
     const handleSave = () => {
-        onSave({ id: "1", name: teamName, teamId: "1"});
+        // onSave({ id: "1", name: teamName, teamId: "1"});
         setTeamName('');
         onClose();
     };
@@ -54,5 +55,3 @@ const TeamModal = ({isOpen, onClose, onSave } : TeamModalProps) => {
         </div>
     );
 };
-
-export default TeamModal;
