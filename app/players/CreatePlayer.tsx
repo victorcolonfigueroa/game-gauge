@@ -31,7 +31,6 @@ const ParentComponent = () => {
   if (isLoading) return (<p>Creating Player...</p>)
     
   return (
-  
    
     <>
       <Button onClick={() => setIsModalOpen(true)}>Add Player</Button>
@@ -41,7 +40,6 @@ const ParentComponent = () => {
         onSave={handleSavePlayer}
         />
     </>
-
   )
 };
 

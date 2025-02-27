@@ -5,8 +5,6 @@ import * as ManagerComponent from '../managers/CreateManager';
 import { createTeamAction } from '../action/Teams/createTeamAction';
 import { Button } from '@/components/ui/button';
 import TeamModal from '@/components/modals/modal.create-team';
-
-
 import { Team } from '@prisma/client';
 
 const ParentComponent = () => {
@@ -47,6 +45,6 @@ const ParentComponent = () => {
             onSave={handleSaveTeam}
             />
             </>
-
+     
     );
 };

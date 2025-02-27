@@ -11,7 +11,6 @@ type CreateTeamInput = {
 
 export async function createTeamAction(team: CreateTeamInput) {
     // create team
-    
     try {
         const { managerId, ...teamData } = team;
         
@@ -22,8 +21,9 @@ export async function createTeamAction(team: CreateTeamInput) {
                     connect: { id: managerId }
                 }
             },
-        });
-            return teamResponse;
+        })
+     
+        return teamResponse;
     }
     catch (error) {
         console.error('Error creating team:', error);

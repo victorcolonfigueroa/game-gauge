@@ -11,7 +11,6 @@ interface PlayersListProps {
 // TODO : add player list
 const PlayersList = ({players}: PlayersListProps) => {
   return (
-
     <div>PlayersList</div>
 
   )

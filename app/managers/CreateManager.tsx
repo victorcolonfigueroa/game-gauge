@@ -6,7 +6,6 @@ import { useState } from 'react';
 import ManagerModal from '@/components/modals/modals.create-manager';
 import { Manager } from '@prisma/client';
 import { createManagerAction } from '../action/manager/createManagerAction';
-
 import { Loader } from '@/components/loader';
 import { redirect } from 'next/navigation';
 
@@ -14,11 +13,9 @@ const ParentComponent = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-
     const handleSaveManager = async (formData: FormData) => {
         setIsLoading(true);
         try {
-
             const response = await createManagerAction(formData);
             console.log('Manager saved:', response);
 
@@ -26,16 +23,13 @@ const ParentComponent = () => {
             redirect("/managers");
         } catch (error) {
             console.error('Error saving manager:', error);
-  
         } finally {
             setIsLoading(false);
             setIsModalOpen(false);
         }
-
     };
 
     if (isLoading) return (<Loader title="Creating Manager..." />)
-
 
     return (
         <>
